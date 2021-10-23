@@ -16,7 +16,10 @@ function GroceryList(props) {
   return (
     <div className="grocery-list">
       <h2>Groceries</h2>
-      <Inputfield handleClickAddNewItem={props.handleClickAddNewItem} />
+      <Inputfield
+        handleClickAddNewItem={props.handleClickAddNewItem}
+        handleKeyDown={props.handleKeyDown}
+      />
       <List items={groceryItems} />
     </div>
   );

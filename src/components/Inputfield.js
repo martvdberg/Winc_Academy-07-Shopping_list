@@ -26,6 +26,12 @@ class Inputfield extends React.Component {
           value={this.state.value}
           placeholder="New Item"
           onChange={this.handleChange}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              this.props.handleClickAddNewItem(this.state.value);
+              this.emptyInputValueState();
+            }
+          }}
         />
         <button
           onClick={() => {

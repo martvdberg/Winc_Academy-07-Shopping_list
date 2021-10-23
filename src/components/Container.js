@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/style.css";
+
 import GroceryList from "./GroceryList";
 import ShoppingCart from "./ShoppingCart";
 
@@ -7,28 +8,7 @@ class Container extends React.Component {
   constructor() {
     super();
     this.state = {
-      groceryItems: [
-        {
-          id: 1,
-          title: "brood",
-        },
-        {
-          id: 2,
-          title: "groente",
-        },
-        {
-          id: 3,
-          title: "koffie",
-        },
-        {
-          id: 4,
-          title: "melk",
-        },
-        {
-          id: 5,
-          title: "pasta",
-        },
-      ],
+      groceryItems: [],
       shoppingListItems: [],
     };
     this.handleClickGroceryItem = this.handleClickGroceryItem.bind(this);
@@ -38,9 +18,21 @@ class Container extends React.Component {
 
   handleClickGroceryItem(item) {
     this.setState((prevState) => {
-      const updatedState = prevState.shoppingListItems;
-      updatedState.push(item);
-      return { shoppingListItems: updatedState };
+      const newState = prevState.shoppingListItems;
+      const itemIndex = newState.findIndex((x) => {
+        return x.title === item.title;
+      });
+
+      if (itemIndex !== -1) {
+        newState[itemIndex].count += 1;
+      } else {
+        newState.push({
+          id: item.id,
+          title: item.title,
+          count: 1,
+        });
+      }
+      return { shoppingListItems: newState };
     });
   }
 
@@ -70,6 +62,7 @@ class Container extends React.Component {
           props={this.state.groceryItems}
           handleClick={this.handleClickGroceryItem}
           handleClickAddNewItem={this.handleClickAddNewItem}
+          handleKeyDown={this.handleKeyDown}
         />
         <ShoppingCart
           props={this.state.shoppingListItems}

@@ -1,16 +1,19 @@
 import React from "react";
 
 function ListItem(props) {
-  // console.log(props);
-  // if condition should be !counter instead of props.handleClick
-  if (props.handleClick) {
+  if (!props.item.count) {
     return (
       <li key={props.item.id} onClick={() => props.handleClick(props.item)}>
         {props.item.title}
       </li>
     );
   } else {
-    return <li key={props.item.id}>{props.item.title}</li>;
+    return (
+      <li key={props.item.id}>
+        <span className="cartItem">{props.item.title} </span>
+        <span className="cartItem__counter">amount: {props.item.count}</span>
+      </li>
+    );
   }
 }
 
