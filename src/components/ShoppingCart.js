@@ -8,11 +8,11 @@ function ShoppingCart(props) {
   });
 
   return (
-    <div className="shopping-cart">
-      <h2>Shopping cart</h2>
-      <button onClick={props.emptyCart}>Clear list</button>
+    <section className="shoppingCart">
+      <h2 className="listTitle">Winkelmand</h2>
+      <button onClick={props.emptyCart}>Leeg de winkelmand</button>
       <List items={shoppingCartItems} />
-    </div>
+    </section>
   );
 }
 

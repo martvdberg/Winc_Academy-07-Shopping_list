@@ -13,15 +13,16 @@ function GroceryList(props) {
       />
     );
   });
+
   return (
-    <div className="grocery-list">
-      <h2>Groceries</h2>
+    <section className="groceryList">
+      <h2 className="listTitle">Boodschappen</h2>
       <Inputfield
         handleClickAddNewItem={props.handleClickAddNewItem}
         handleKeyDown={props.handleKeyDown}
       />
       <List items={groceryItems} />
-    </div>
+    </section>
   );
 }
 

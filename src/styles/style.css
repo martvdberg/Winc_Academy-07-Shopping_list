@@ -1,31 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.siteTitle {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 50px;
+  font-size: 3em;
+}
+
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
+}
+
+section {
+  width: 47vw;
+}
+
+.listTitle {
+  margin: 35px auto;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  padding: 7px;
+  border-radius: 0.5em;
+  width: 150px;
+}
+
+button {
+  padding: 7px;
+  width: 150px;
 }
 
 ul {
   text-align: left;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  margin-top: 20px;
 }
 
-.grocery-list {
-  width: 40vw;
-  background-color: red;
+.listItem {
+  padding: 7px;
+  margin-top: 3px;
 }
 
-.grocery-list ul li:nth-child(odd) {
-  background-color: green;
+.shoppingCart .listItem {
+  display: flex;
+  justify-content: space-between;
 }
 
-.shopping-cart {
-  width: 40vw;
-  background-color: blue;
+.groceryList .listItem:nth-child(odd) {
+  background-color: #e18582;
+}
+.groceryList .listItem:nth-child(even) {
+  background-color: #f3b8c1;
 }
 
-.shopping-cart ul li:nth-child(even) {
-  background-color: yellow;
+.shoppingCart .listItem:nth-child(odd) {
+  background-color: #b5d6e3;
+}
+.shoppingCart .listItem:nth-child(even) {
+  background-color: #e6feff;
 }

@@ -5,8 +5,8 @@ import GroceryList from "./GroceryList";
 import ShoppingCart from "./ShoppingCart";
 
 class Container extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       groceryItems: [],
       shoppingListItems: [],
@@ -16,27 +16,38 @@ class Container extends React.Component {
     this.handleClickAddNewItem = this.handleClickAddNewItem.bind(this);
   }
 
+  // add an item to the shoppingcart when clicked
   handleClickGroceryItem(item) {
     this.setState((prevState) => {
-      const newState = prevState.shoppingListItems;
-      const itemIndex = newState.findIndex((x) => {
-        return x.title === item.title;
-      });
-
-      if (itemIndex !== -1) {
-        newState[itemIndex].count += 1;
-      } else {
-        newState.push({
+      let updatedState = prevState.shoppingListItems;
+      if (
+        !updatedState.some((itemInState) => itemInState.title === item.title)
+      ) {
+        updatedState.push({
           id: item.id,
           title: item.title,
           count: 1,
         });
+      } else {
+        updatedState = this.addAmountToItem(item, updatedState);
       }
-      return { shoppingListItems: newState };
+      return { shoppingListItems: updatedState };
     });
   }
 
-  handleClickAddNewItem(inputValue) {
+  // If an item is already in the shoppingcart increase amount with 1
+  addAmountToItem(item, prevState) {
+    const itemIndex = prevState.findIndex(
+      (itemInState) => itemInState.title === item.title
+    );
+    prevState[itemIndex].count += 1;
+    return prevState;
+  }
+
+  // Add new item to the shoppinglist
+  handleClickAddNewItem(event, inputValue) {
+    event.preventDefault();
+
     if (inputValue !== "") {
       this.setState((prevState) => {
         const updatedState = prevState.groceryItems;
@@ -51,6 +62,7 @@ class Container extends React.Component {
     }
   }
 
+  // Empty the cart when clicked
   emptyCart() {
     this.setState({ shoppingListItems: [] });
   }
